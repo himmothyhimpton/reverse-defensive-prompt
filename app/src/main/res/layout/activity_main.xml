@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/headerText"
+            android:text="@string/app_header"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/basePromptInput"
+            android:hint="@string/base_prompt_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp" />
+
+        <TextView
+            android:text="@string/strategy_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp" />
+
+        <Spinner
+            android:id="@+id/strategySpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/countLabel"
+            android:text="Variants: 20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp" />
+
+        <SeekBar
+            android:id="@+id/countSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/generateButton"
+            android:text="@string/generate_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp" />
+
+        <TextView
+            android:id="@+id/metricsTextView"
+            android:text="@string/metrics_default"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp" />
+
+        <TextView
+            android:id="@+id/resultsTextView"
+            android:text="@string/results_default"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:typeface="monospace"
+            android:paddingTop="12dp"
+            android:overScrollMode="ifContentScrolls"
+            android:scrollbars="vertical"
+            android:minHeight="240dp" />
+    </LinearLayout>
+</ScrollView>
+

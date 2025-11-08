@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PromptDefenseDemo</string>
+    <string name="app_header">Safe prompt variant generator (defensive workload demo)</string>
+    <string name="base_prompt_hint">Enter a safe base prompt (harmful terms are redacted)</string>
+    <string name="strategy_label">Strategy</string>
+    <string name="generate_button">Generate Variants</string>
+    <string name="metrics_default">Generated: 0 • Tokens≈0 • Time: 0ms</string>
+    <string name="results_default">Results will appear here.</string>
+    <string name="disclaimer">This demo avoids generating disallowed content. Use for defense-only.</string>
+    <string-array name="strategy_array">
+        <item>Synonym</item>
+        <item>Obfuscation</item>
+        <item>Casing</item>
+        <item>Whitespace</item>
+        <item>Encoding</item>
+        <item>Mixed</item>
+    </string-array>
+</resources>
+
