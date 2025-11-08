@@ -1,0 +1,78 @@
+plugins {
+    id 'com.android.application' version '8.1.0' apply false
+    id 'org.jetbrains.kotlin.android' version '1.9.0' apply false
+}
+
+
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {}
+}
+# PromptDefenseDemo (Android)
+
+This demo app generates harmless prompt variants to help you measure computational workload for red-teaming and defense work without enabling misuse. It sanitizes disallowed terms and focuses on benign text transformations (synonyms, casing, whitespace, light encoding) while reporting simple metrics (variants count, approximate tokens, elapsed time).
+
+## What this app demonstrates
+- Variant generation pipeline that can be scaled to stress test systems.
+- Basic strategies that mimic prompt mutation without teaching bypasses.
+- Metrics collection: unique variants, approximate token count, elapsed time.
+
+## Build and run
+1. Open the project in Android Studio (Giraffe or newer).
+2. Let Android Studio install the Android Gradle Plugin and SDK as needed.
+3. Select a device (emulator or physical) and run the `app` configuration.
+
+Alternatively, with a configured environment you can run `gradlew assembleDebug` from the project root. The APK will be at `app/build/outputs/apk/debug/app-debug.apk`.
+
+## CI: GitHub Actions
+This repo includes `.github/workflows/android.yml` that builds and uploads the APK artifacts.
+
+- Triggers: pushes to `main/master`, pull requests, tags `v*`, and manual dispatch.
+- Jobs:
+  - Debug build: `./gradlew --no-daemon clean :app:assembleDebug`, artifact `app-debug.apk`.
+  - Release build (unsigned, on `v*` tags): `./gradlew --no-daemon clean :app:assembleRelease`, artifact `app-release-unsigned.apk`.
+
+Requirements:
+- Commit the Gradle wrapper (`gradlew`, `gradlew.bat`, and `gradle/wrapper/*`). If missing, generate it locally with a Gradle install: `gradle wrapper` and commit the new files.
+- JDK 17 is auto-installed by the workflow.
+
+Optional signing (not enabled by default):
+- Add signing config in `app/build.gradle` and provide secrets in the repository:
+  - `ANDROID_KEYSTORE_BASE64` (base64 of your `.jks`), `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS`, `ANDROID_KEY_PASSWORD`.
+- Decode the keystore in a CI step and build a signed release (`assembleRelease`).
+
+## Ethical use only
+- The app redacts risky terms and avoids generating disallowed content.
+- Use this strictly for defensive evaluation, capacity planning, and resilience testing.
+- Do not attempt to use this app to bypass safety policies or enable harmful outcomes.
+
+## Extend safely
+- Add more benign mutation strategies such as paraphrasing via on-device models that are filtered and audited.
+- Hook results into a local evaluator that scores for policy compliance, ambiguity, and robustness.
+- Log aggregate metrics only (no sensitive text) and prefer differential privacy if you collect data.
+
+## Notes
+- This project is intentionally simple; it avoids network calls and external LLMs.
+- Token approximation is naive (word count). Replace with a proper tokenizer if needed.
+
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "PromptDefenseDemo"
+include(":app")
+
